@@ -31,9 +31,8 @@ public class PlayerController : MonoBehaviour
         dirtParticle.Play();
         gameOverCanvas.enabled = false;
         //playerRB.AddForce(Vector3.up * 1000);
-        jumpForce = 50f;
         playerCF = GetComponent<ConstantForce>();
-        gravityModifier = 2f;
+        //gravityModifier = 2f;
         playerCF.force *= gravityModifier;
 
 
@@ -41,11 +40,6 @@ public class PlayerController : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        
-    }
-
-    private void FixedUpdate()
     {
         if (Input.GetKeyDown(KeyCode.Space) && isOnGround && !gameOver)
         {
@@ -55,10 +49,15 @@ public class PlayerController : MonoBehaviour
             playerAudioSource.PlayOneShot(jumpSound);
             dirtParticle.Stop();
         }
-        if(Input.GetKeyDown(KeyCode.R) && gameOver)
+        if (Input.GetKeyDown(KeyCode.R) && gameOver)
         {
-            SceneManager.LoadScene(0,LoadSceneMode.Single);
+            SceneManager.LoadScene(0, LoadSceneMode.Single);
         }
+    }
+
+    private void FixedUpdate()
+    {
+        
     }
 
     private void OnCollisionEnter(Collision collision)
